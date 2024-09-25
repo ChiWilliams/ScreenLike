@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "ScreenLike",
+    "version": "1.0",
+
+    "description": "Any time you open a new tab, asks you whether it's a good idea.",
+
+    "icons": {
+        "16": "icons/ScreenLike16.png",
+        "32": "icons/ScreenLike32.png",
+        "48": "icons/ScreenLike48.png",
+        "64": "icons/ScreenLike64.png",
+        "96": "icons/ScreenLike96.png",
+        "128": "icons/ScreenLike128.png"
+    },
+
+    "browser_action": {
+        "default_icon": "icons/ScreenLike32.png",
+        "default_title": "ScreenLike",
+        "default_popup": "popup/popup.html"
+    },
+
+    "permissions": ["storage", "url", "tabs"],
+
+    "background": {
+		"scripts": ["background.js"]
+	}
+
+}
