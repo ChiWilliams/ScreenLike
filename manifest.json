@@ -20,10 +20,10 @@
         "default_popup": "popup/popup.html"
     },
 
-    "permissions": ["storage", "url", "tabs"],
+    "permissions": ["storage", "url", "tabs","webNavigation"],
 
     "background": {
-		"scripts": ["background.js"]
+		"scripts": ["background/background.js"]
 	}
 
 }
