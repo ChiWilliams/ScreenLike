@@ -20,7 +20,7 @@
         "default_popup": "popup/popup.html"
     },
 
-    "permissions": ["storage", "url", "tabs","webNavigation"],
+    "permissions": ["storage", "<all_urls>", "tabs","webNavigation","downloads","downloads.open"],
 
     "background": {
 		"scripts": ["background/background.js"]
