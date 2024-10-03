@@ -12,3 +12,7 @@ Planned extensions:
 
 Eventually, I hope to use this extension as part of an extension which trains a ML model to predict which websites will be helpful
 to visit.
+
+*How to build*:
+Clone the repository, and then in a command prompt on the directory, run "web-ext run". This only sets up a local session.
+I'll eventually create a more complete distribution.
