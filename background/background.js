@@ -57,16 +57,17 @@ gettingStoredStats.then(results => {
       return;
     }
 
-    const time = new Date(Date.now()).toISOString();
+    const time = evt.timeStamp;
 
-    logObject = {"url": evt.url, "time": time};
+    
 
+    const tabId = evt.tabId;
+    browser.tabs.get(tabId).then((tab) => {
+      logObject = {"url": evt.url, "time": time, "title": tab.title};
+      results.log.push(logObject);
+      browser.storage.local.set(results);
+    });
 
-    results.log.push(logObject);
-    // results.host[url.hostname]++;
-
-    // Persist the updated stats.
-    browser.storage.local.set(results);
   }, {
     url: [{schemes: ["http", "https"]}]});
 });

@@ -52,7 +52,7 @@ function DataDownload() {
       conflictAction: 'uniquify',
       saveAs: false
     }).then(() => {
-      //URL.revokeObjectURL(url);
+      URL.revokeObjectURL(url);
       console.log("Download completed");
     }).catch(error => {
       console.error("Download failed:", error);
