@@ -45,7 +45,6 @@ function DataDownload() {
     const logList = JSON.stringify(results.log);
     const blob = new Blob([logList], {type: 'application/json'});
     const url = URL.createObjectURL(blob);
-
     browser.downloads.download({
       url: url,
       filename: 'storage.json',
@@ -85,7 +84,7 @@ gettingStoredStats.then(results => {
 
   let listElement = document.getElementById("url-list");
   addElements(listElement, results.log, (log) => { 
-    return `url: ${log.url} at time ${log.time}`;
+    return `url: ${log.url} at time ${log.time} \nwith title ${log.title} with result ${log.approved}`;
   });
 
 }).catch(error => {
