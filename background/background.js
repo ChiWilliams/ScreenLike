@@ -4,25 +4,6 @@ function logTabs(tabs) {
     }
 }
 
-// // Function to log tab information
-// function logTabInfo(tab, approved) {
-//   let logObject = {
-//     url: tab.url,
-//     time: Date.now(),
-//     title: tab.title,
-//     //approved: approved
-//   };
-  
-//   browser.storage.local.get("log").then(results => {
-//     if (!results.log) {
-//       results.log = [];
-//     }
-//     results.log.push(logObject);
-//     return browser.storage.local.set(results);
-//   }).catch(error => {
-//     console.error("Error logging tab info:", error);
-//   });
-// }
 
 function onError(error) {
     console.error(`Error: ${error}`);
@@ -74,12 +55,12 @@ gettingStoredStats.then(results => {
 
 function logTabInfo(evt, response) {
   const time = evt.timeStamp;
-    const tabId = evt.tabId;
+  const tabId = evt.tabId;
 
-    browser.tabs.get(tabId).then((tab) => {
-      logObject = {"url": evt.url, "time": time, "title": tab.title, "approved": response.approved};
-      results.log.push(logObject);
-      browser.storage.local.set(results);
+  browser.tabs.get(tabId).then((tab) => {
+    let logObject = {"url": evt.url, "time": time, "title": tab.title, "approved": response.approved};
+    results.log.push(logObject);
+    browser.storage.local.set(results);
   });
 }
 
@@ -96,14 +77,16 @@ function logTabInfo(evt, response) {
     let executing = browser.tabs.executeScript(
     { "file": "/content-scripts/approval.js" }                // object
     )
-    executing.then( () => {
+    executing.then( async () => {
       console.log("done it before");
-      browser.tabs.sendMessage(evt.tabId, {
-      command: "showApprovalPopup"}).then(response =>{
-        logTabInfo(evt, response);
+      let response = await browser.tabs.sendMessage(evt.tabId, {
+      command: "showApprovalPopup"});
+
+      console.log("It happened")
+      console.log(response)
+      logTabInfo(evt, response);
       });
 
-       });
   }, {
     url: [{schemes: ["http", "https"]}]});
 });
