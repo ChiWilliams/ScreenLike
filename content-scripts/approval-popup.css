@@ -1,0 +1,22 @@
+:host {
+    all: unset;
+    display: block;
+    background-color: white;
+    border: solid 1px #ccc;
+    padding: 1em;
+    font: initial;
+    color: initial;
+    color-scheme: dark;
+  }
+
+dialog {
+    width: 50%;
+    height: 50%
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    backdrop-filter: blur(5px); /* Blurs the background */
+    opacity: 75%; /* Adjusts backdrop opacity */
+}
+

@@ -1,34 +1,52 @@
 async function manageQueryBox() {
-  const dialog = document.createElement('dialog');
-  dialog.style = "all: revert"
-  dialog.innerHTML = `
-    <p>Is opening this tab a good idea?!</p>
-    <button id="queryYes">Yes</button> 
-    <button id="queryNo">No</button>
-    <button id="queryMaybe">I don't know</button>
+  const wrapper = document.createElement('div');
+  const shadow = wrapper.attachShadow({ mode: 'open' });
+  const cssUrl = browser.runtime.getURL('content-scripts/approval-popup.css');
+
+  // fetch the CSS file
+  const response = await fetch(cssUrl);
+  const cssText = await response.text();
+  //Apply CSS to shadow dom
+  const style = document.createElement('style');
+  style.textContent = cssText;
+  shadow.appendChild(style);
+
+  shadow.innerHTML += `
+    <body>
+      <dialog id="approvalPopup">
+        <div>
+          Dialog content
+          <p>Is opening this tab a good idea?!</p>
+          <button id="queryYes">Yes</button> 
+          <button id="queryNo">No</button>
+          <button id="queryMaybe">I don't know</button>
+        </div>
+      </dialog>
+    </body>
   `;
 
-
   // Add the dialog to the page
-  document.body.appendChild(dialog);
+  document.body.appendChild(wrapper);
 
   // Show the dialog
+  const dialog = shadow.querySelector('dialog');
   dialog.showModal();
+
   
   // Yes button is clicked
   // Return a Promise that resolves when the user clicks one of the buttons
   return new Promise((resolve) => {
-    document.getElementById('queryYes').addEventListener('click', () => {
+    shadow.getElementById('queryYes').addEventListener('click', () => {
       dialog.close();
       resolve({approved: "true"});  // Resolve with a result
     });
 
-    document.getElementById('queryNo').addEventListener('click', () => {
+    shadow.getElementById('queryNo').addEventListener('click', () => {
       dialog.close();
       resolve({approved: "false"});  // Resolve with a result
     });
 
-    document.getElementById('queryMaybe').addEventListener('click', () => {
+    shadow.getElementById('queryMaybe').addEventListener('click', () => {
       dialog.close();
       resolve({approved: "nan"});  // Resolve with a result
     });
