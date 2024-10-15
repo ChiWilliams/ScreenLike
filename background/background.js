@@ -58,7 +58,7 @@ function logTabInfo(evt, response) {
       return;
     }
 
-    let executing = browser.tabs.executeScript(
+    let executing = browser.tabs.executeScript(evt.tabId,
     { "file": "/content-scripts/approval.js" }                // object
     )
     executing.then( async () => {
