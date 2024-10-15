@@ -1,22 +1,3 @@
-// /**
-//  * Function to listen for clicks
-//  */
-// function listenForClicks() {
-//   document.addEventListener("click", (e) => {
-//   /**
-//   * Given the name of a beast, get the URL to the corresponding image.
-//   */
-//   function getInstruction {
-//   switch (beastName) {
-//   case "Frog":
-//   return browser.runtime.getURL("beasts/frog.jpg");
-//   case "Snake":
-//   return browser.runtime.getURL("beasts/snake.jpg");
-//   case "Turtle":
-//   return browser.runtime.getURL("beasts/turtle.jpg");
-//   }
-// }
-
 MAX_ITEMS = 5
 
 function addElements(element, array, callback) {
@@ -61,15 +42,23 @@ function DataDownload() {
   });
 }
 
+/**
+ * Function to open the options page
+ */
+function openOptions() {
+  browser.runtime.openOptionsPage();
+  window.close();
+}
+
 function listenForClicks() {
-  console.log("Setting up click listeners");
+  //console.log("Setting up click listeners");
   document.addEventListener("click", (e) => {
     console.log("Click event detected on:", e.target);
     if (e.target.id === "data-download") {
-      console.log("Data download button clicked");
       DataDownload();
-    } else if (e.target.id === "ignore-webpage") {
-      console.log("Ignore webpage button clicked");
+    } else if (e.target.id === "open-settings") {
+      console.log("Settings paged opened");
+      openOptions();
   }});
 }
 
@@ -97,11 +86,3 @@ document.addEventListener("DOMContentLoaded", () => {
   listenForClicks();
 });
 
- //if (e.target.tagName !== "BUTTON" || !e.target.closest("#popup-content")) {
-//   // Ignore when click is not on a button within <div id="popup-content">.
-//   if (e.target.type === "data-download") {
-//     DataDownload();
-//   }
-//   return;
-//   }
-  

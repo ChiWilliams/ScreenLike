@@ -1,5 +1,6 @@
 async function manageQueryBox() {
   const dialog = document.createElement('dialog');
+  dialog.style = "all: revert"
   dialog.innerHTML = `
     <p>Is opening this tab a good idea?!</p>
     <button id="queryYes">Yes</button> 

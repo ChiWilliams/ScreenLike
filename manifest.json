@@ -20,10 +20,15 @@
         "default_popup": "popup/popup.html"
     },
 
-    "permissions": ["storage", "<all_urls>", "tabs", "activeTab", "webNavigation", "downloads", "downloads.open","host"],
+    "permissions": ["storage", "<all_urls>", "tabs", "webNavigation", "downloads","host"],
 
     "background": {
         "scripts": ["background/background.js"]
+    },
+
+    "options_ui": {
+        "page": "settings/options.html",
+        "open_in_tab": true
     },
 
     "content_scripts": [
